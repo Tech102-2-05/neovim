@@ -99,6 +99,7 @@ return {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = true, path = 1 },
           { "diagnostics", symbols = Yuki.icons.diagnostics },
+          require("mssql").lualine_component,
         },
         lualine_x = {
           {
