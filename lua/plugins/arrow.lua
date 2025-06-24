@@ -3,6 +3,6 @@ return {
   opts = {
     show_icons = true,
     leader_key = "\t",
-    --buffer_leader_key = "m",
+    buffer_leader_key = "m",
   },
 }
