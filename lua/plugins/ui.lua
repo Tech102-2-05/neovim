@@ -80,49 +80,106 @@ return {
     },
   },
 
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     options = {
+  --       icons_enabled = true,
+  --       always_divide_middle = true,
+  --       section_separators = { left = "", right = "" },
+  --       component_separators = { left = "", right = "" },
+  --       disabled_filetypes = { "snacks_dashboard", "neo-tree" },
+  --     },
+  --     -- stylua: ignore start
+  --     sections = {
+  --       lualine_a = { { 'mode', fmt = function(str) return ' ' .. str end } },
+  --       lualine_b = { "branch" },
+  --       lualine_c = {
+  --         { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+  --         { "filename", file_status = true, path = 1 },
+  --         { "diagnostics", symbols = Yuki.icons.diagnostics },
+  --       },
+  --       lualine_x = {
+  --         {
+  --           "diff",
+  --           symbols =  Yuki.icons.git,
+  --           sources = function()
+  --             local gitsigns = vim.b.gitsigns_status_dict
+  --             if gitsigns then return gitsigns end
+  --           end,
+  --         },
+  --         { "selectioncount", padding = { left = 1, right = 1 } },
+  --         { "searchcount", padding = { left = 1, right = 1 } },
+  --       },
+  --       lualine_y = {
+  --         { "progress", separator = "" },
+  --         { "location" },
+  --       },
+  --       lualine_z = { Yuki.utils.get_time }
+  --     },
+  --     -- stylua: ignore end
+  --     inactive_sections = {},
+  --   },
+  -- },
+
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = {
-      options = {
-        icons_enabled = true,
-        always_divide_middle = true,
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
-        disabled_filetypes = { "snacks_dashboard", "neo-tree" },
-      },
-      -- stylua: ignore start
-      sections = {
-        lualine_a = { { 'mode', fmt = function(str) return ' ' .. str end } },
-        lualine_b = { "branch" },
-        lualine_c = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { "filename", file_status = true, path = 1 },
-          { "diagnostics", symbols = Yuki.icons.diagnostics },         
+    opts = function()
+      local Yuki = require("yuki") -- hoặc module bạn đang dùng chứa `icons` và `utils`
+      local opts = {
+        options = {
+          icons_enabled = true,
+          always_divide_middle = true,
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
+          disabled_filetypes = { "snacks_dashboard", "neo-tree" },
         },
-        lualine_x = {
-          {
-            "diff",
-            symbols =  Yuki.icons.git,
-            sources = function()
-              local gitsigns = vim.b.gitsigns_status_dict
-              if gitsigns then return gitsigns end
-            end,
+        sections = {
+          lualine_a = {
+            {
+              "mode",
+              fmt = function(str)
+                return " " .. str
+              end,
+            },
           },
-          { "selectioncount", padding = { left = 1, right = 1 } },
-          { "searchcount", padding = { left = 1, right = 1 } },
+          lualine_b = { "branch" },
+          lualine_c = {
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { "filename", file_status = true, path = 1 },
+            { "diagnostics", symbols = Yuki.icons.diagnostics },
+          },
+          lualine_x = {
+            {
+              "diff",
+              symbols = Yuki.icons.git,
+              sources = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                  return gitsigns
+                end
+              end,
+            },
+            { "selectioncount", padding = { left = 1, right = 1 } },
+            { "searchcount", padding = { left = 1, right = 1 } },
+          },
+          lualine_y = {
+            { "progress", separator = "" },
+            { "location" },
+          },
+          lualine_z = { Yuki.utils.get_time },
         },
-        lualine_y = {
-          { "progress", separator = "" },
-          { "location" },
-        },
-        lualine_z = { Yuki.utils.get_time }
-      },
-      -- stylua: ignore end
-      inactive_sections = {},
-    },
-  },
+        inactive_sections = {},
+      }
 
+      -- 👉 Thêm component từ mssql.nvim vào lualine_c
+      table.insert(opts.sections.lualine_c, require("mssql").lualine_component)
+
+      return opts
+    end,
+  },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
