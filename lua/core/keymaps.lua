@@ -156,4 +156,4 @@ map("<leader>t", function()
 end, "Terminal (Root Dir)")
 
 map("<leader>t", "<cmd>close<cr>", "Hide Terminal", { mode = "t" })
-require("mssql").set_keymaps("<leader>ms")
+require("mssql").set_keymaps("<leader>m")

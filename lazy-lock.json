@@ -22,6 +22,7 @@
   "rose-pine": { "branch": "main", "commit": "6b9840790cc7acdfadde07f308d34b62dd9cc675" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "solarized-osaka": { "branch": "main", "commit": "f796014c14b1910e08d42cc2077fef34f08e0295" },
+  "sqlua.nvim": { "branch": "master", "commit": "e4db0e1e16741e1ea42c620d0b8ce3347cc02c51" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "727f8fa12fe693e478015c00072a56fbe4558cf5" },
   "tokyonight": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "ts-autotag.nvim": { "branch": "master", "commit": "0f1dc38fddd99b468ef58938d7cd99ce1d6bcb0e" },
